@@ -1,0 +1,15 @@
+{
+    "name": "habitissimo2030/corporate_kata",
+    "license": "",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Katas\\": "src",
+            "Katas\\Tests\\": "tests"
+        }
+    }
+}
+
