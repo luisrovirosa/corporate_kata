@@ -11,7 +11,7 @@ class HotelService
         $this->hotelRepository = $hotelRepository;
     }
 
-    public function addHotel(HotelId $anyHotelId, string $string)
+    public function addHotel(HotelId $hotelId, string $hotelName)
     {
     }
 }
