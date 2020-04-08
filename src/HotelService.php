@@ -13,5 +13,6 @@ class HotelService
 
     public function addHotel(HotelId $hotelId, string $hotelName)
     {
+        $this->hotelRepository->save(new Hotel($hotelId, $hotelName));
     }
 }

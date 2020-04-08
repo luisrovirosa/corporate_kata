@@ -8,8 +8,22 @@ use Katas\HotelRepository;
 
 class InMemoryHotelRepository implements HotelRepository
 {
-    public function findById(HotelId $aHotelId): Hotel
+    /** @var Hotel[] */
+    private array $hotels;
+
+    public function __construct()
     {
-        return new Hotel();
+        $this->hotels = [];
+    }
+
+
+    public function findById(HotelId $hotelId): Hotel
+    {
+        return array_filter($this->hotels, fn(Hotel $hotel) => $hotel->id() === $hotelId)[0];
+    }
+
+    public function save(Hotel $hotel): void
+    {
+        $this->hotels[] = $hotel;
     }
 }

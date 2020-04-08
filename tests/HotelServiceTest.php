@@ -9,9 +9,8 @@ use PHPUnit\Framework\TestCase;
 class HotelServiceTest extends TestCase
 {
     /** @test */
-    public function hotel_manager_can_create_an_hotel()
+    public function add_a_hotel()
     {
-        $this->markTestIncomplete("Not yet");
         $hotelRepository = new InMemoryHotelRepository();
         $hotelService = new HotelService($hotelRepository);
         $aHotelId = new HotelId();
