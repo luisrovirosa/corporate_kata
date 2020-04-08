@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+  php:
+    build: .
+    image: corporate-kata
+    user: $UID
+    ports:
+      - "8080:8080"
+    command:
+      - php
+      - -d=upload_max_filesize=10M
+      - -d=post_max_size=12M
+      - artisan
+      - serve
+      - --host=0.0.0.0
+      - --port=8080
+    working_dir: /code
+    environment:
+      HOME: /code
+    volumes:
+      - ".:/code:cached"
+    networks:
+      - app
+
+volumes:
+    database:
+        driver: local
+
+networks:
+    app:
+        driver: bridge
