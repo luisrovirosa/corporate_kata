@@ -10,28 +10,33 @@ use PHPUnit\Framework\TestCase;
 class HotelServiceTest extends TestCase
 {
     const A_HOTEL_NAME = 'A hotel Name';
+    private $hotelRepository;
+
+    protected function setUp(): void
+    {
+        $this->hotelRepository = new InMemoryHotelRepository();
+        parent::setUp();
+    }
 
     /** @test */
     public function add_a_hotel()
     {
-        $hotelRepository = new InMemoryHotelRepository();
-        $hotelService = new HotelService($hotelRepository);
+        $hotelService = new HotelService($this->hotelRepository);
         $aHotelId = new HotelId();
 
         $hotelService->addHotel($aHotelId, self::A_HOTEL_NAME);
 
-        $hotel = $hotelRepository->findById($aHotelId);
+        $hotel = $this->hotelRepository->findById($aHotelId);
         $this->assertEquals(self::A_HOTEL_NAME, $hotel->name());
     }
 
     /** @test */
     public function find_an_existing_hotel()
     {
-        $hotelRepository = new InMemoryHotelRepository();
         $aHotelId = new HotelId();
         $existingHotel = new Hotel($aHotelId, self::A_HOTEL_NAME);
-        $hotelRepository->save($existingHotel);
-        $hotelService = new HotelService($hotelRepository);
+        $this->hotelRepository->save($existingHotel);
+        $hotelService = new HotelService($this->hotelRepository);
 
         $foundHotel = $hotelService->findHotelBy($aHotelId);
 
