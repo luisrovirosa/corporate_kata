@@ -4,13 +4,15 @@ namespace Katas\Tests;
 
 use Katas\Hotel;
 use Katas\HotelId;
+use Katas\HotelRepository;
 use Katas\HotelService;
+use Katas\RoomType;
 use PHPUnit\Framework\TestCase;
 
 class HotelServiceTest extends TestCase
 {
     const A_HOTEL_NAME = 'A hotel Name';
-    private $hotelRepository;
+    private HotelRepository $hotelRepository;
 
     protected function setUp(): void
     {
@@ -42,5 +44,21 @@ class HotelServiceTest extends TestCase
 
         $this->assertEquals($existingHotel, $foundHotel);
     }
+
+    /** @test */
+    public function set_a_room()
+    {
+        $aHotelId = new HotelId();
+        $existingHotel = new Hotel($aHotelId, self::A_HOTEL_NAME);
+        $this->hotelRepository->save($existingHotel);
+        $hotelService = new HotelService($this->hotelRepository);
+        $numberOfRooms = 55;
+
+        $hotelService->setRoom($aHotelId, $numberOfRooms, RoomType::STANDARD);
+
+        $foundHotel = $hotelService->findHotelBy($aHotelId);
+        $this->assertEquals($numberOfRooms, $foundHotel->numberOfRoomsOfType(RoomType::STANDARD));
+    }
+
 }
 

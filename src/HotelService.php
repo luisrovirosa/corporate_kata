@@ -21,8 +21,9 @@ class HotelService
         return $this->hotelRepository->findById($hotelId);
     }
 
-    public function setRoom(HotelId $aHotelId, int $numOfRooms, string $roomType): void
+    public function setRoom(HotelId $hotelId, int $numOfRooms, string $roomType): void
     {
-        // do something
+        $hotel = $this->findHotelBy($hotelId);
+        $hotel->setRoomsOfType($roomType, $numOfRooms);
     }
 }
