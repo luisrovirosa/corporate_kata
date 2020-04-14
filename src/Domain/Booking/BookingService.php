@@ -25,11 +25,14 @@ class BookingService
 
     public function book(EmployeeId $employeeId, HotelId $hotelId, string $roomType, DateTimeImmutable $checkIn, DateTimeImmutable $checkOut): Booking
     {
-        return new Booking();
+        $booking = new Booking();
+        $this->bookingRepository->save($booking);
+
+        return $booking;
     }
 
     public function findByBookingId(BookingId $id): Booking
     {
-        return new Booking();
+        return $this->bookingRepository->findById($id);
     }
 }

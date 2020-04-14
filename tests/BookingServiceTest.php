@@ -15,7 +15,7 @@ use Katas\Tests\Infrastructure\InMemoryEmployeeRepository;
 use Katas\Tests\Infrastructure\InMemoryHotelRepository;
 use PHPUnit\Framework\TestCase;
 
-class AcceptanceTest extends TestCase
+class BookingServiceTest extends TestCase
 {
     private const NUMBER_OF_ROOMS = 10;
 
@@ -44,7 +44,6 @@ class AcceptanceTest extends TestCase
             new DateTimeImmutable('+1 day'),
             );
 
-        $this->markTestIncomplete("Not done yet");
         $retrievedBooking = $bookingService->findByBookingId($booking->id());
         $this->assertEquals($booking, $retrievedBooking);
     }
