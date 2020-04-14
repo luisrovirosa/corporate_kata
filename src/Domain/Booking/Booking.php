@@ -2,8 +2,6 @@
 
 namespace Katas\Domain\Booking;
 
-use Katas\Domain\Booking\BookingId;
-
 class Booking
 {
     private BookingId $bookingId;

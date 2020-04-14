@@ -2,8 +2,6 @@
 
 namespace Katas\Domain\Hotel;
 
-use Katas\Domain\Hotel\HotelId;
-
 class Hotel
 {
     private HotelId $hotelId;

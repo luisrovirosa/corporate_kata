@@ -3,9 +3,6 @@
 namespace Katas\Domain\Booking;
 
 use DateTimeImmutable;
-use Katas\Domain\Booking\Booking;
-use Katas\Domain\Booking\BookingId;
-use Katas\Domain\Booking\BookingRepository;
 use Katas\Domain\Company\EmployeeId;
 use Katas\Domain\Company\EmployeeRepository;
 use Katas\Domain\Hotel\HotelId;
