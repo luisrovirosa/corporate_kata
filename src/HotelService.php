@@ -20,4 +20,9 @@ class HotelService
     {
         return $this->hotelRepository->findById($hotelId);
     }
+
+    public function setRoom(HotelId $aHotelId, int $numOfRooms, string $roomType): void
+    {
+        // do something
+    }
 }

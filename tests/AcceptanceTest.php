@@ -14,16 +14,18 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptanceTest extends TestCase
 {
+    private const NUMBER_OF_ROOMS = 10;
+
     /**
      * @test
      */
     public function an_employee_can_book_a_room()
     {
-        $this->markTestIncomplete("Not done yet");
         $aHotelId = new HotelId();
         $hotelRepository = new InMemoryHotelRepository();
         $hotelService = new HotelService($hotelRepository);
         $hotelService->addHotel($aHotelId, "any HotelName");
+        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
         $employeeRepository = new InMemoryEmployeeRepository();
         $companyService = new CompanyService($employeeRepository);
@@ -39,6 +41,7 @@ class AcceptanceTest extends TestCase
             new DateTimeImmutable('+1 day'),
             );
 
+        $this->markTestIncomplete("Not done yet");
         $retrievedBooking = $bookingService->findByBookingId($booking->id());
         $this->assertEquals($booking, $retrievedBooking);
     }
