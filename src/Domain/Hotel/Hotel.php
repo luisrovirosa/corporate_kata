@@ -6,13 +6,13 @@ class Hotel
 {
     private HotelId $hotelId;
     private string $hotelName;
-    private array $rooms;
+    private array $roomTypeCounters;
 
     public function __construct(HotelId $hotelId, string $hotelName)
     {
         $this->hotelId = $hotelId;
         $this->hotelName = $hotelName;
-        $this->rooms = [];
+        $this->roomTypeCounters = [];
     }
 
     public function name(): string
@@ -27,12 +27,11 @@ class Hotel
 
     public function numberOfRoomsOfType(string $roomType): int
     {
-        return $this->rooms[$roomType];
+        return $this->roomTypeCounters[$roomType];
     }
 
     public function setRoomsOfType(string $roomType, int $numOfRooms): void
     {
-        $this->rooms[$roomType] = $numOfRooms;
+        $this->roomTypeCounters[$roomType] = $numOfRooms;
     }
-
 }
