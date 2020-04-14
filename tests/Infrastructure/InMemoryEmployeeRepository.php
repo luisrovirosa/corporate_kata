@@ -1,8 +1,8 @@
 <?php
 
-namespace Katas\Tests;
+namespace Katas\Tests\Infrastructure;
 
-use Katas\EmployeeRepository;
+use Katas\Domain\Company\EmployeeRepository;
 
 class InMemoryEmployeeRepository implements EmployeeRepository
 {

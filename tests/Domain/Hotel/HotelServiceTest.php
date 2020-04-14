@@ -1,12 +1,13 @@
 <?php
 
-namespace Katas\Tests;
+namespace Katas\Tests\Domain\Hotel;
 
-use Katas\Hotel;
-use Katas\HotelId;
-use Katas\HotelRepository;
-use Katas\HotelService;
-use Katas\RoomType;
+use Katas\Domain\Hotel\Hotel;
+use Katas\Domain\Hotel\HotelId;
+use Katas\Domain\Hotel\HotelRepository;
+use Katas\Domain\Hotel\HotelService;
+use Katas\Domain\Hotel\RoomType;
+use Katas\Tests\Infrastructure\InMemoryHotelRepository;
 use PHPUnit\Framework\TestCase;
 
 class HotelServiceTest extends TestCase

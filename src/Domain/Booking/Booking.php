@@ -1,6 +1,8 @@
 <?php
 
-namespace Katas;
+namespace Katas\Domain\Booking;
+
+use Katas\Domain\Booking\BookingId;
 
 class Booking
 {

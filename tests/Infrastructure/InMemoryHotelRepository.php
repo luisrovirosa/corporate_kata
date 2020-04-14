@@ -1,10 +1,10 @@
 <?php
 
-namespace Katas\Tests;
+namespace Katas\Tests\Infrastructure;
 
-use Katas\Hotel;
-use Katas\HotelId;
-use Katas\HotelRepository;
+use Katas\Domain\Hotel\Hotel;
+use Katas\Domain\Hotel\HotelId;
+use Katas\Domain\Hotel\HotelRepository;
 
 class InMemoryHotelRepository implements HotelRepository
 {

@@ -1,6 +1,9 @@
 <?php
 
-namespace Katas;
+namespace Katas\Domain\Hotel;
+
+use Katas\Domain\Hotel\Hotel;
+use Katas\Domain\Hotel\HotelId;
 
 interface HotelRepository
 {

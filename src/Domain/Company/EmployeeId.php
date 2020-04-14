@@ -1,8 +1,8 @@
 <?php
 
-namespace Katas;
+namespace Katas\Domain\Company;
 
-class BookingId
+class EmployeeId
 {
     private string $id;
 

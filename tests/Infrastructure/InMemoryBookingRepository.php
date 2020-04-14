@@ -1,8 +1,8 @@
 <?php
 
-namespace Katas\Tests;
+namespace Katas\Tests\Infrastructure;
 
-use Katas\BookingRepository;
+use Katas\Domain\Booking\BookingRepository;
 
 class InMemoryBookingRepository implements BookingRepository
 {

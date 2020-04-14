@@ -1,6 +1,10 @@
 <?php
 
-namespace Katas;
+namespace Katas\Domain\Company;
+
+use Katas\Domain\Company\CompanyId;
+use Katas\Domain\Company\EmployeeId;
+use Katas\Domain\Company\EmployeeRepository;
 
 class CompanyService
 {

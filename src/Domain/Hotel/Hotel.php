@@ -1,6 +1,8 @@
 <?php
 
-namespace Katas;
+namespace Katas\Domain\Hotel;
+
+use Katas\Domain\Hotel\HotelId;
 
 class Hotel
 {

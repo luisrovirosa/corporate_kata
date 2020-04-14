@@ -3,13 +3,16 @@
 namespace Katas\Tests;
 
 use DateTimeImmutable;
-use Katas\BookingService;
-use Katas\CompanyId;
-use Katas\CompanyService;
-use Katas\EmployeeId;
-use Katas\HotelId;
-use Katas\HotelService;
-use Katas\RoomType;
+use Katas\Domain\Booking\BookingService;
+use Katas\Domain\Company\CompanyId;
+use Katas\Domain\Company\CompanyService;
+use Katas\Domain\Company\EmployeeId;
+use Katas\Domain\Hotel\HotelId;
+use Katas\Domain\Hotel\HotelService;
+use Katas\Domain\Hotel\RoomType;
+use Katas\Tests\Infrastructure\InMemoryBookingRepository;
+use Katas\Tests\Infrastructure\InMemoryEmployeeRepository;
+use Katas\Tests\Infrastructure\InMemoryHotelRepository;
 use PHPUnit\Framework\TestCase;
 
 class AcceptanceTest extends TestCase
