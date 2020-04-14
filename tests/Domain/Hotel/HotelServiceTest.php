@@ -13,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 class HotelServiceTest extends TestCase
 {
     const A_HOTEL_NAME = 'A hotel Name';
+
     private HotelRepository $hotelRepository;
 
     protected function setUp(): void
@@ -57,9 +58,8 @@ class HotelServiceTest extends TestCase
 
         $hotelService->setRoom($aHotelId, $numberOfRooms, RoomType::STANDARD);
 
-        $foundHotel = $hotelService->findHotelBy($aHotelId);
+        $foundHotel = $this->hotelRepository->findById($aHotelId);
         $this->assertEquals($numberOfRooms, $foundHotel->numberOfRoomsOfType(RoomType::STANDARD));
     }
 
 }
-
