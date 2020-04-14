@@ -7,7 +7,6 @@ namespace Katas\Tests\Domain\Company;
 
 use Katas\Domain\Company\CompanyId;
 use Katas\Domain\Company\CompanyService;
-use Katas\Domain\Company\Employee;
 use Katas\Domain\Company\EmployeeId;
 use Katas\Tests\Infrastructure\InMemoryEmployeeRepository;
 use PHPUnit\Framework\TestCase;
@@ -25,6 +24,7 @@ class CompanyServiceTest extends TestCase
         $companyService->addEmployee($aCompanyId, $anEmployeeId);
 
         $foundEmployee = $employeeRepository->findById($anEmployeeId);
+        $this->assertEquals($anEmployeeId, $foundEmployee->id());
         $this->assertEquals($aCompanyId, $foundEmployee->companyId());
     }
 }
