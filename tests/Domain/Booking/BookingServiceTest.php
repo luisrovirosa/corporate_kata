@@ -74,7 +74,6 @@ class BookingServiceTest extends TestCase
      */
     public function is_not_possible_to_book_when_check_out_date_is_earlier_than_check_in_date(): void
     {
-
         $aHotelId = new HotelId();
         $this->hotelService->addHotel($aHotelId, 'any HotelName');
         $this->hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);

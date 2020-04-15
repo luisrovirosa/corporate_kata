@@ -10,15 +10,16 @@ use Katas\Domain\Company\EmployeeRepository;
 
 class InMemoryEmployeeRepository implements EmployeeRepository
 {
-    private array $items = [];
+    /** @var Employee[] */
+    private array $employees = [];
 
     public function save(Employee $employee): void
     {
-        $this->items[] = $employee;
+        $this->employees[] = $employee;
     }
 
     public function findById(EmployeeId $id): Employee
     {
-        return array_filter($this->items, fn (Employee $employee) => $employee->id() === $id)[0];
+        return array_filter($this->employees, fn (Employee $employee) => $employee->id() === $id)[0];
     }
 }
