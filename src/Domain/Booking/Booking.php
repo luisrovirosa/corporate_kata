@@ -4,28 +4,20 @@ declare(strict_types = 1);
 
 namespace Katas\Domain\Booking;
 
-use DateTimeImmutable;
-
 class Booking
 {
     private BookingId $bookingId;
+    private DateRange $dateRange;
 
-    public function __construct(DateTimeImmutable $checkIn, DateTimeImmutable $checkOut)
+    public function __construct(DateRange $dateRange)
     {
-        $this->validateDateRange($checkIn, $checkOut);
+        $this->dateRange = $dateRange;
         $this->bookingId = new BookingId();
     }
 
     public function id(): BookingId
     {
         return $this->bookingId;
-    }
-
-    private function validateDateRange(DateTimeImmutable $checkIn, DateTimeImmutable $checkOut): void
-    {
-        if ($checkIn > $checkOut){
-            throw new InvalidDateRangeException();
-        }
     }
 
 }
