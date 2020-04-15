@@ -64,11 +64,16 @@ class BookingServiceTest extends TestCase
     public function is_not_possible_to_book_when_check_out_date_is_earlier_than_check_in_date(): void
     {
         $aHotelId = new HotelId();
+        $hotelRepository = new InMemoryHotelRepository();
+        $hotelService = new HotelService($hotelRepository);
+        $hotelService->addHotel($aHotelId, 'any HotelName');
+        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
-        $hotelRepository = $this->prophesize(HotelRepository::class);
-        $employeeRepository = $this->prophesize(EmployeeRepository::class);
-        $bookingRepository = $this->prophesize(BookingRepository::class);
-        $bookingService = new BookingService($hotelRepository->reveal(), $employeeRepository->reveal(), $bookingRepository->reveal());
+        $employeeRepository = new InMemoryEmployeeRepository();
+        $companyService = new CompanyService($employeeRepository);
+        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
+        $bookingRepository = new InMemoryBookingRepository();
+        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
 
         $this->expectException(InvalidDateRangeException::class);
 
@@ -87,11 +92,16 @@ class BookingServiceTest extends TestCase
     public function is_not_possible_to_book_when_check_out_date_is_the_same_than_check_in_date(): void
     {
         $aHotelId = new HotelId();
+        $hotelRepository = new InMemoryHotelRepository();
+        $hotelService = new HotelService($hotelRepository);
+        $hotelService->addHotel($aHotelId, 'any HotelName');
+        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
-        $hotelRepository = $this->prophesize(HotelRepository::class);
-        $employeeRepository = $this->prophesize(EmployeeRepository::class);
-        $bookingRepository = $this->prophesize(BookingRepository::class);
-        $bookingService = new BookingService($hotelRepository->reveal(), $employeeRepository->reveal(), $bookingRepository->reveal());
+        $employeeRepository = new InMemoryEmployeeRepository();
+        $companyService = new CompanyService($employeeRepository);
+        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
+        $bookingRepository = new InMemoryBookingRepository();
+        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
 
         $this->expectException(InvalidDateRangeException::class);
 
