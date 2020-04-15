@@ -30,7 +30,7 @@ class BookingServiceTest extends TestCase
     private const NUMBER_OF_ROOMS = 10;
     private HotelRepository $hotelRepository;
     private EmployeeRepository $employeeRepository;
-    private BookingRepository $bookingRepository;
+    private InMemoryBookingRepository $bookingRepository;
     private HotelService $hotelService;
     private CompanyService $companyService;
     private BookingService $bookingService;
@@ -80,15 +80,18 @@ class BookingServiceTest extends TestCase
         $anEmployeeId = new EmployeeId();
         $this->companyService->addEmployee(new CompanyId(), $anEmployeeId);
 
-        $this->expectException(InvalidDateRangeException::class);
-
-        $this->bookingService->book(
-            $anEmployeeId,
-            $aHotelId,
-            RoomType::STANDARD,
-            $this->tomorrow(),
-            $this->today(),
+        try {
+            $this->bookingService->book(
+                $anEmployeeId,
+                $aHotelId,
+                RoomType::STANDARD,
+                $this->tomorrow(),
+                $this->today(),
             );
+            self::fail("Should never get here.");
+        } catch (InvalidDateRangeException $e) {
+            $this->assertEmpty($this->bookingRepository->all());
+        }
     }
 
     /**
@@ -115,7 +118,6 @@ class BookingServiceTest extends TestCase
     }
 
     /**
-     * no se puede reservar si no existe el tipo de habitación en ese hotel
      * @test
      */
     public function is_not_possible_to_book_when_room_type_is_not_available(): void

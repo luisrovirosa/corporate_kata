@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Katas\Tests\Infrastructure;
 
@@ -24,6 +24,11 @@ class InMemoryBookingRepository implements BookingRepository
 
     public function findById(BookingId $id): Booking
     {
-        return array_filter($this->bookings, fn (Booking $booking) => $booking->id() === $id)[0];
+        return array_filter($this->bookings, fn(Booking $booking) => $booking->id() === $id)[0];
+    }
+
+    public function all(): array
+    {
+        return $this->bookings;
     }
 }
