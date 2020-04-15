@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Katas\Tests;
+namespace Katas\Tests\Domain\Booking;
 
 use DateTimeImmutable;
 use Katas\Domain\Booking\BookingService;
