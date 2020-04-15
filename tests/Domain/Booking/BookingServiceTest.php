@@ -88,7 +88,7 @@ class BookingServiceTest extends TestCase
                 $this->tomorrow(),
                 $this->today(),
             );
-            self::fail("Should never get here.");
+            $this->fail("Should never get here.");
         } catch (InvalidDateRangeException $e) {
             $this->assertEmpty($this->bookingRepository->all());
         }
