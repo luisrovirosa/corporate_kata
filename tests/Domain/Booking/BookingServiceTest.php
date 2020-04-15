@@ -80,6 +80,30 @@ class BookingServiceTest extends TestCase
             );
     }
 
+    /**
+     * @test
+     */
+    public function is_not_possible_to_book_when_check_out_date_is_the_same_than_check_in_date(): void
+    {
+        $aHotelId = new HotelId();
+        $anEmployeeId = new EmployeeId();
+        $hotelRepository = $this->prophesize(HotelRepository::class);
+        $employeeRepository = $this->prophesize(EmployeeRepository::class);
+        $bookingRepository = $this->prophesize(BookingRepository::class);
+        $bookingService = new BookingService($hotelRepository->reveal(), $employeeRepository->reveal(), $bookingRepository->reveal());
+
+        $this->expectException(InvalidDateRangeException::class);
+
+        $today = $this->today();
+        $bookingService->book(
+            $anEmployeeId,
+            $aHotelId,
+            RoomType::STANDARD,
+            $today,
+            $today,
+        );
+    }
+
     // se puede reservar la misma habitación para días diferentes
     // se puede reservar más de una vez para el mismo día si hay más de una habitación
     // no se puede reservar si no hay habitaciones disponibles para un día en concreto
@@ -88,6 +112,8 @@ class BookingServiceTest extends TestCase
     // no puedes reservar si no perteneces a la compañía
 
     // no se puede comprar si hay políticas de empresa que lo prohiban
+
+
     protected function tomorrow(): DateTimeImmutable
     {
         return new DateTimeImmutable('+1 day');

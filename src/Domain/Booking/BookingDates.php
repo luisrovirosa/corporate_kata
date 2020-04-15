@@ -13,7 +13,7 @@ class BookingDates
     }
     private function validateDateRange(DateTimeImmutable $checkIn, DateTimeImmutable $checkOut): void
     {
-        if ($checkIn > $checkOut){
+        if ($checkIn >= $checkOut){
             throw new InvalidDateRangeException();
         }
     }
