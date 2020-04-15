@@ -2,3 +2,4 @@ vendor/
 .composer/
 .env
 .php_cs.cache
+var/cache
