@@ -9,7 +9,8 @@
         "phpstan/phpstan": "^0.12.18",
         "phpstan/phpstan-phpunit": "^0.12.7",
         "phpstan/phpstan-deprecation-rules": "^0.12.2",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpspec/prophecy-phpunit": "2.0.0"
     },
     "autoload": {
         "psr-4": {

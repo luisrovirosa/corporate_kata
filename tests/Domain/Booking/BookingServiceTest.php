@@ -20,9 +20,12 @@ use Katas\Tests\Infrastructure\InMemoryBookingRepository;
 use Katas\Tests\Infrastructure\InMemoryEmployeeRepository;
 use Katas\Tests\Infrastructure\InMemoryHotelRepository;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class BookingServiceTest extends TestCase
 {
+    use ProphecyTrait;
+
     private const NUMBER_OF_ROOMS = 10;
 
     /**
