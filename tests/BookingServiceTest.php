@@ -49,7 +49,34 @@ class BookingServiceTest extends TestCase
         $retrievedBooking = $bookingService->findByBookingId($booking->id());
         $this->assertEquals($booking, $retrievedBooking);
     }
-    // que la fecha de entrada no puede ser posterior a la fecha de salida
+
+    /**
+     * @test
+     */
+    public function is_not_possible_to_book_when_check_out_date_is_earlier_than_check_in_date(): void
+    {
+        $aHotelId = new HotelId();
+        $hotelRepository = new InMemoryHotelRepository();
+        $hotelService = new HotelService($hotelRepository);
+        $hotelService->addHotel($aHotelId, 'any HotelName');
+        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
+        $anEmployeeId = new EmployeeId();
+        $employeeRepository = new InMemoryEmployeeRepository();
+        $companyService = new CompanyService($employeeRepository);
+        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
+        $bookingRepository = new InMemoryBookingRepository();
+        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
+
+        $this->expectException(InvalidDateRangeException::class);
+
+        $bookingService->book(
+            $anEmployeeId,
+            $aHotelId,
+            RoomType::STANDARD,
+            new DateTimeImmutable('+1 day'),
+            new DateTimeImmutable(),
+            );
+    }
 
     // se puede reservar la misma habitación para días diferentes
     // se puede reservar más de una vez para el mismo día si hay más de una habitación
