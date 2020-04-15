@@ -49,4 +49,14 @@ class BookingServiceTest extends TestCase
         $retrievedBooking = $bookingService->findByBookingId($booking->id());
         $this->assertEquals($booking, $retrievedBooking);
     }
+    // que la fecha de entrada no puede ser posterior a la fecha de salida
+
+    // se puede reservar la misma habitación para días diferentes
+    // se puede reservar más de una vez para el mismo día si hay más de una habitación
+    // no se puede reservar si no hay habitaciones disponibles para un día en concreto
+
+    // no se puede reservar si no existe el tipo de habitación en ese hotel
+    // no puedes reservar si no perteneces a la compañía
+
+    // no se puede comprar si hay políticas de empresa que lo prohiban
 }
