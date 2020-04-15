@@ -73,8 +73,8 @@ class BookingServiceTest extends TestCase
             $anEmployeeId,
             $aHotelId,
             RoomType::STANDARD,
-            new DateTimeImmutable('+1 day'),
-            new DateTimeImmutable(),
+            $this->tomorrow(),
+            $this->today(),
             );
     }
 
@@ -86,4 +86,13 @@ class BookingServiceTest extends TestCase
     // no puedes reservar si no perteneces a la compañía
 
     // no se puede comprar si hay políticas de empresa que lo prohiban
+    protected function tomorrow(): DateTimeImmutable
+    {
+        return new DateTimeImmutable('+1 day');
+    }
+
+    protected function today(): DateTimeImmutable
+    {
+        return new DateTimeImmutable();
+    }
 }
