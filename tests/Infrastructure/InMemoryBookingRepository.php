@@ -22,7 +22,7 @@ class InMemoryBookingRepository implements BookingRepository
         $this->bookings[] = $booking;
     }
 
-    public function findById(BookingId $id): ?Booking
+    public function findById(BookingId $id): Booking
     {
         return array_filter($this->bookings, fn (Booking $booking) => $booking->id() === $id)[0];
     }

@@ -25,7 +25,7 @@ class HotelServiceTest extends TestCase
     }
 
     /** @test */
-    public function add_a_hotel()
+    public function add_a_hotel(): void
     {
         $hotelService = new HotelService($this->hotelRepository);
         $aHotelId = new HotelId();
@@ -37,7 +37,7 @@ class HotelServiceTest extends TestCase
     }
 
     /** @test */
-    public function find_an_existing_hotel()
+    public function find_an_existing_hotel(): void
     {
         $aHotelId = new HotelId();
         $existingHotel = new Hotel($aHotelId, self::A_HOTEL_NAME);
@@ -50,7 +50,7 @@ class HotelServiceTest extends TestCase
     }
 
     /** @test */
-    public function set_a_room()
+    public function set_a_room(): void
     {
         $aHotelId = new HotelId();
         $existingHotel = new Hotel($aHotelId, self::A_HOTEL_NAME);

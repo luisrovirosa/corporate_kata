@@ -6,7 +6,10 @@ namespace Katas\Domain\Company;
 
 interface EmployeeRepository
 {
-    public function save(Employee $employee);
+    public function save(Employee $employee): void;
 
-    public function findById(EmployeeId $id): ?Employee;
+    /**
+     * @throws EmployeeNotFoundException
+     */
+    public function findById(EmployeeId $id): Employee;
 }

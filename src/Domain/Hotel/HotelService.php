@@ -13,12 +13,12 @@ class HotelService
         $this->hotelRepository = $hotelRepository;
     }
 
-    public function addHotel(HotelId $hotelId, string $hotelName)
+    public function addHotel(HotelId $hotelId, string $hotelName): void
     {
         $this->hotelRepository->save(new Hotel($hotelId, $hotelName));
     }
 
-    public function findHotelBy(HotelId $hotelId): ?Hotel
+    public function findHotelBy(HotelId $hotelId): Hotel
     {
         return $this->hotelRepository->findById($hotelId);
     }

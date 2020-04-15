@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Katas\Tests;
 
+use DateTimeImmutable;
 use Katas\Domain\Booking\BookingService;
 use Katas\Domain\Company\CompanyId;
 use Katas\Domain\Company\CompanyService;
@@ -23,7 +24,7 @@ class BookingServiceTest extends TestCase
     /**
      * @test
      */
-    public function an_employee_can_book_a_room()
+    public function an_employee_can_book_a_room(): void
     {
         $aHotelId = new HotelId();
         $hotelRepository = new InMemoryHotelRepository();
@@ -41,8 +42,8 @@ class BookingServiceTest extends TestCase
             $anEmployeeId,
             $aHotelId,
             RoomType::STANDARD,
-            new \DateTimeImmutable(),
-            new \DateTimeImmutable('+1 day'),
+            new DateTimeImmutable(),
+            new DateTimeImmutable('+1 day'),
             );
 
         $retrievedBooking = $bookingService->findByBookingId($booking->id());

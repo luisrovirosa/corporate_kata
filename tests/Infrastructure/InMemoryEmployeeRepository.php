@@ -12,12 +12,12 @@ class InMemoryEmployeeRepository implements EmployeeRepository
 {
     private array $items = [];
 
-    public function save(Employee $employee)
+    public function save(Employee $employee): void
     {
         $this->items[] = $employee;
     }
 
-    public function findById(EmployeeId $id): ?Employee
+    public function findById(EmployeeId $id): Employee
     {
         return array_filter($this->items, fn (Employee $employee) => $employee->id() === $id)[0];
     }

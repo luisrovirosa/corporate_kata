@@ -8,5 +8,8 @@ interface BookingRepository
 {
     public function save(Booking $booking): void;
 
-    public function findById(BookingId $id): ?Booking;
+    /**
+     * @throws BookingNotFoundException
+     */
+    public function findById(BookingId $id): Booking;
 }
