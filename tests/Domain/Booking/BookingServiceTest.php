@@ -28,6 +28,23 @@ class BookingServiceTest extends TestCase
     use ProphecyTrait;
 
     private const NUMBER_OF_ROOMS = 10;
+    private HotelRepository $hotelRepository;
+    private EmployeeRepository $employeeRepository;
+    private BookingRepository $bookingRepository;
+    private HotelService $hotelService;
+    private CompanyService $companyService;
+    private BookingService $bookingService;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->hotelRepository = new InMemoryHotelRepository();
+        $this->hotelService = new HotelService($this->hotelRepository);
+        $this->employeeRepository = new InMemoryEmployeeRepository();
+        $this->companyService = new CompanyService($this->employeeRepository);
+        $this->bookingRepository = new InMemoryBookingRepository();
+        $this->bookingService = new BookingService($this->hotelRepository, $this->employeeRepository, $this->bookingRepository);
+    }
 
     /**
      * @test
@@ -35,18 +52,12 @@ class BookingServiceTest extends TestCase
     public function an_employee_can_book_a_room(): void
     {
         $aHotelId = new HotelId();
-        $hotelRepository = new InMemoryHotelRepository();
-        $hotelService = new HotelService($hotelRepository);
-        $hotelService->addHotel($aHotelId, 'any HotelName');
-        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
+        $this->hotelService->addHotel($aHotelId, 'any HotelName');
+        $this->hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
-        $employeeRepository = new InMemoryEmployeeRepository();
-        $companyService = new CompanyService($employeeRepository);
-        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
-        $bookingRepository = new InMemoryBookingRepository();
-        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
+        $this->companyService->addEmployee(new CompanyId(), $anEmployeeId);
 
-        $booking = $bookingService->book(
+        $booking = $this->bookingService->book(
             $anEmployeeId,
             $aHotelId,
             RoomType::STANDARD,
@@ -54,7 +65,7 @@ class BookingServiceTest extends TestCase
             new DateTimeImmutable('+1 day'),
             );
 
-        $retrievedBooking = $bookingService->findByBookingId($booking->id());
+        $retrievedBooking = $this->bookingService->findByBookingId($booking->id());
         $this->assertEquals($booking, $retrievedBooking);
     }
 
@@ -63,21 +74,16 @@ class BookingServiceTest extends TestCase
      */
     public function is_not_possible_to_book_when_check_out_date_is_earlier_than_check_in_date(): void
     {
+
         $aHotelId = new HotelId();
-        $hotelRepository = new InMemoryHotelRepository();
-        $hotelService = new HotelService($hotelRepository);
-        $hotelService->addHotel($aHotelId, 'any HotelName');
-        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
+        $this->hotelService->addHotel($aHotelId, 'any HotelName');
+        $this->hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
-        $employeeRepository = new InMemoryEmployeeRepository();
-        $companyService = new CompanyService($employeeRepository);
-        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
-        $bookingRepository = new InMemoryBookingRepository();
-        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
+        $this->companyService->addEmployee(new CompanyId(), $anEmployeeId);
 
         $this->expectException(InvalidDateRangeException::class);
 
-        $bookingService->book(
+        $this->bookingService->book(
             $anEmployeeId,
             $aHotelId,
             RoomType::STANDARD,
@@ -92,21 +98,15 @@ class BookingServiceTest extends TestCase
     public function is_not_possible_to_book_when_check_out_date_is_the_same_than_check_in_date(): void
     {
         $aHotelId = new HotelId();
-        $hotelRepository = new InMemoryHotelRepository();
-        $hotelService = new HotelService($hotelRepository);
-        $hotelService->addHotel($aHotelId, 'any HotelName');
-        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
+        $this->hotelService->addHotel($aHotelId, 'any HotelName');
+        $this->hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
-        $employeeRepository = new InMemoryEmployeeRepository();
-        $companyService = new CompanyService($employeeRepository);
-        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
-        $bookingRepository = new InMemoryBookingRepository();
-        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
+        $this->companyService->addEmployee(new CompanyId(), $anEmployeeId);
 
         $this->expectException(InvalidDateRangeException::class);
 
         $today = $this->today();
-        $bookingService->book(
+        $this->bookingService->book(
             $anEmployeeId,
             $aHotelId,
             RoomType::STANDARD,
@@ -122,20 +122,14 @@ class BookingServiceTest extends TestCase
     public function is_not_possible_to_book_when_room_type_is_not_available(): void
     {
         $aHotelId = new HotelId();
-        $hotelRepository = new InMemoryHotelRepository();
-        $hotelService = new HotelService($hotelRepository);
-        $hotelService->addHotel($aHotelId, 'any HotelName');
-        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
+        $this->hotelService->addHotel($aHotelId, 'any HotelName');
+        $this->hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
-        $employeeRepository = new InMemoryEmployeeRepository();
-        $companyService = new CompanyService($employeeRepository);
-        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
-        $bookingRepository = new InMemoryBookingRepository();
-        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
+        $this->companyService->addEmployee(new CompanyId(), $anEmployeeId);
 
         $this->expectException(RoomTypeDoesNotExistException::class);
 
-        $bookingService->book(
+        $this->bookingService->book(
             $anEmployeeId,
             $aHotelId,
             RoomType::JUNIOR_SUITE,
@@ -162,4 +156,6 @@ class BookingServiceTest extends TestCase
     {
         return new DateTimeImmutable();
     }
+
+
 }
