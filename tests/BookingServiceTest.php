@@ -6,6 +6,7 @@ namespace Katas\Tests;
 
 use DateTimeImmutable;
 use Katas\Domain\Booking\BookingService;
+use Katas\Domain\Booking\InvalidDateRangeException;
 use Katas\Domain\Company\CompanyId;
 use Katas\Domain\Company\CompanyService;
 use Katas\Domain\Company\EmployeeId;

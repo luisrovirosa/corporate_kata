@@ -1,6 +1,6 @@
 <?php
 
-namespace Katas\Tests;
+namespace Katas\Domain\Booking;
 
 use Exception;
 

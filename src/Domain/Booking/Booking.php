@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Katas\Domain\Booking;
 
 use DateTimeImmutable;
-use Katas\Tests\InvalidDateRangeException;
 
 class Booking
 {
