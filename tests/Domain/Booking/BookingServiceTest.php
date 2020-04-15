@@ -16,6 +16,7 @@ use Katas\Domain\Hotel\HotelId;
 use Katas\Domain\Hotel\HotelRepository;
 use Katas\Domain\Hotel\HotelService;
 use Katas\Domain\Hotel\RoomType;
+use Katas\Domain\Hotel\RoomTypeDoesNotExistException;
 use Katas\Tests\Infrastructure\InMemoryBookingRepository;
 use Katas\Tests\Infrastructure\InMemoryEmployeeRepository;
 use Katas\Tests\Infrastructure\InMemoryHotelRepository;
@@ -104,11 +105,39 @@ class BookingServiceTest extends TestCase
         );
     }
 
+    /**
+     * no se puede reservar si no existe el tipo de habitación en ese hotel
+     * @test
+     */
+    public function is_not_possible_to_book_when_room_type_is_not_available(): void
+    {
+        $aHotelId = new HotelId();
+        $hotelRepository = new InMemoryHotelRepository();
+        $hotelService = new HotelService($hotelRepository);
+        $hotelService->addHotel($aHotelId, 'any HotelName');
+        $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
+        $anEmployeeId = new EmployeeId();
+        $employeeRepository = new InMemoryEmployeeRepository();
+        $companyService = new CompanyService($employeeRepository);
+        $companyService->addEmployee(new CompanyId(), $anEmployeeId);
+        $bookingRepository = new InMemoryBookingRepository();
+        $bookingService = new BookingService($hotelRepository, $employeeRepository, $bookingRepository);
+
+        $this->expectException(RoomTypeDoesNotExistException::class);
+
+        $bookingService->book(
+            $anEmployeeId,
+            $aHotelId,
+            RoomType::JUNIOR_SUITE,
+            $this->today(),
+            $this->tomorrow(),
+        );
+    }
+
     // se puede reservar la misma habitación para días diferentes
     // se puede reservar más de una vez para el mismo día si hay más de una habitación
     // no se puede reservar si no hay habitaciones disponibles para un día en concreto
 
-    // no se puede reservar si no existe el tipo de habitación en ese hotel
     // no puedes reservar si no perteneces a la compañía
 
     // no se puede comprar si hay políticas de empresa que lo prohiban

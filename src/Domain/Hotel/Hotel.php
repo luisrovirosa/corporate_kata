@@ -29,7 +29,7 @@ class Hotel
 
     public function numberOfRoomsOfType(string $roomType): int
     {
-        return $this->roomTypeCounters[$roomType];
+        return $this->roomTypeCounters[$roomType] ?? 0;
     }
 
     public function setRoomsOfType(string $roomType, int $numOfRooms): void
