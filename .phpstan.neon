@@ -1,0 +1,23 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+
+parameters:
+    tmpDir: /code/var/cache/phpstan
+    customRulesetUsed: true
+    reportMagicMethods: true
+    reportMagicProperties: true
+    inferPrivatePropertyTypeFromConstructor: true
+    autoload_directories: []
+    excludes_analyse:
+        - %currentWorkingDirectory%/var
+        - %currentWorkingDirectory%/src/Maker
+        - %currentWorkingDirectory%/src/Infrastructure/Persistence/Doctrine/Migrations
+    universalObjectCratesClasses:
+        - PHPUnit\Framework\TestCase
+    polluteCatchScopeWithTryAssignments: true
+    reportUnmatchedIgnoredErrors: false
+
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors: []
