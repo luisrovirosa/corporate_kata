@@ -27,7 +27,7 @@ class BookingService
 
     public function book(EmployeeId $employeeId, HotelId $hotelId, string $roomType, DateTimeImmutable $checkIn, DateTimeImmutable $checkOut): Booking
     {
-        $booking = new Booking(new DateRange($checkIn, $checkOut));
+        $booking = new Booking(new BookingDates($checkIn, $checkOut));
         $this->bookingRepository->save($booking);
 
         return $booking;

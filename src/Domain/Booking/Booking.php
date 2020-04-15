@@ -7,9 +7,9 @@ namespace Katas\Domain\Booking;
 class Booking
 {
     private BookingId $bookingId;
-    private DateRange $dateRange;
+    private BookingDates $dateRange;
 
-    public function __construct(DateRange $dateRange)
+    public function __construct(BookingDates $dateRange)
     {
         $this->dateRange = $dateRange;
         $this->bookingId = new BookingId();

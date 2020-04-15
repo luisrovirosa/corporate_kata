@@ -4,7 +4,7 @@ namespace Katas\Domain\Booking;
 
 use DateTimeImmutable;
 
-class DateRange
+class BookingDates
 {
     public function __construct(DateTimeImmutable $checkIn, DateTimeImmutable $checkOut)
     {
