@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Katas\Domain\Booking;
 
-use DateTimeImmutable;
 use Katas\Domain\Company\EmployeeId;
 use Katas\Domain\Company\EmployeeRepository;
 use Katas\Domain\Hotel\HotelId;
@@ -23,7 +24,7 @@ class BookingService
         $this->bookingRepository = $bookingRepository;
     }
 
-    public function book(EmployeeId $employeeId, HotelId $hotelId, string $roomType, DateTimeImmutable $checkIn, DateTimeImmutable $checkOut): Booking
+    public function book(EmployeeId $employeeId, HotelId $hotelId, string $roomType, \DateTimeImmutable $checkIn, \DateTimeImmutable $checkOut): Booking
     {
         $booking = new Booking();
         $this->bookingRepository->save($booking);

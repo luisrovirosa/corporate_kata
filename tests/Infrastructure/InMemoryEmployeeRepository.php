@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Katas\Tests\Infrastructure;
 
 use Katas\Domain\Company\Employee;
@@ -17,6 +19,6 @@ class InMemoryEmployeeRepository implements EmployeeRepository
 
     public function findById(EmployeeId $id): ?Employee
     {
-        return array_filter($this->items, fn(Employee $employee) => $employee->id() === $id)[0];
+        return array_filter($this->items, fn (Employee $employee) => $employee->id() === $id)[0];
     }
 }

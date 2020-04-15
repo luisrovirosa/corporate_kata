@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Katas\Tests\Infrastructure;
 
 use Katas\Domain\Booking\Booking;
@@ -22,6 +24,6 @@ class InMemoryBookingRepository implements BookingRepository
 
     public function findById(BookingId $id): ?Booking
     {
-        return array_filter($this->bookings, fn(Booking $booking) => $booking->id() === $id)[0];
+        return array_filter($this->bookings, fn (Booking $booking) => $booking->id() === $id)[0];
     }
 }

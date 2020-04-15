@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Katas\Tests\Infrastructure;
 
 use Katas\Domain\Hotel\Hotel;
@@ -16,10 +18,9 @@ class InMemoryHotelRepository implements HotelRepository
         $this->hotels = [];
     }
 
-
     public function findById(HotelId $hotelId): Hotel
     {
-        return array_filter($this->hotels, fn(Hotel $hotel) => $hotel->id() === $hotelId)[0];
+        return array_filter($this->hotels, fn (Hotel $hotel) => $hotel->id() === $hotelId)[0];
     }
 
     public function save(Hotel $hotel): void

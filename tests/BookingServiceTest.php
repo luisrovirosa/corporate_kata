@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Katas\Tests;
 
-use DateTimeImmutable;
 use Katas\Domain\Booking\BookingService;
 use Katas\Domain\Company\CompanyId;
 use Katas\Domain\Company\CompanyService;
@@ -27,7 +28,7 @@ class BookingServiceTest extends TestCase
         $aHotelId = new HotelId();
         $hotelRepository = new InMemoryHotelRepository();
         $hotelService = new HotelService($hotelRepository);
-        $hotelService->addHotel($aHotelId, "any HotelName");
+        $hotelService->addHotel($aHotelId, 'any HotelName');
         $hotelService->setRoom($aHotelId, self::NUMBER_OF_ROOMS, RoomType::STANDARD);
         $anEmployeeId = new EmployeeId();
         $employeeRepository = new InMemoryEmployeeRepository();
@@ -40,8 +41,8 @@ class BookingServiceTest extends TestCase
             $anEmployeeId,
             $aHotelId,
             RoomType::STANDARD,
-            new DateTimeImmutable(),
-            new DateTimeImmutable('+1 day'),
+            new \DateTimeImmutable(),
+            new \DateTimeImmutable('+1 day'),
             );
 
         $retrievedBooking = $bookingService->findByBookingId($booking->id());

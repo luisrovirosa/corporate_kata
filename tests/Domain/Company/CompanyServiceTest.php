@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Katas\Tests\Domain\Company;
-
 
 use Katas\Domain\Company\CompanyId;
 use Katas\Domain\Company\CompanyService;

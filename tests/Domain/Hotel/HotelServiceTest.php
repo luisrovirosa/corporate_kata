@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Katas\Tests\Domain\Hotel;
 
 use Katas\Domain\Hotel\Hotel;
@@ -61,5 +63,4 @@ class HotelServiceTest extends TestCase
         $foundHotel = $this->hotelRepository->findById($aHotelId);
         $this->assertEquals($numberOfRooms, $foundHotel->numberOfRoomsOfType(RoomType::STANDARD));
     }
-
 }

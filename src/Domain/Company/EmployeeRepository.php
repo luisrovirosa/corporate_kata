@@ -1,7 +1,8 @@
 <?php
 
-namespace Katas\Domain\Company;
+declare(strict_types = 1);
 
+namespace Katas\Domain\Company;
 
 interface EmployeeRepository
 {
