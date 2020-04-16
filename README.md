@@ -1,13 +1,13 @@
-Run the project,
+# Corporate Hotel Booking Kata
+https://katalyst.codurance.com/corporate-hotel-booking
 
-prepare a `.env`
-
+## How to run the tests
+Prepare a `.env`
 ```
 echo "UID=$UID" >> .env
 ```
 
-Install dependencies and run the tests:
-
+Run the tests:
 ```
 make install
 make test
